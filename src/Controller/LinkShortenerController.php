@@ -87,7 +87,7 @@ class LinkShortenerController
         $message = 'added';
 
         return $this->json([
-            'link' => $shortLink,
+            'link' => $shortedLink,
             'status' => 201,
             'message' => $message
         ]);

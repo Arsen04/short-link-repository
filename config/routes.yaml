@@ -1,5 +1,20 @@
+#controllers:
+#    resource:
+#        path: ../src/Controller/
+#        namespace: App\Controller
+#    type: attribute
+
 controllers:
     resource:
         path: ../src/Controller/
         namespace: App\Controller
+        type: annotation
     type: attribute
+
+api_v1_0_routes:
+    resource: ../src/Controller/
+    type: annotation
+    prefix: /api/v1.0
+    trailing_slash_on_root: false
+
+# Другие маршруты
