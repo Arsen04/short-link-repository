@@ -47,7 +47,7 @@ class UrlParser
     }
 
     /**
-     * Getting Protocol (http:// or https://).
+     * Getting Protocol (http:// или https://).
      * @return string
      */
     public function getProtocol(): string
