@@ -5,8 +5,8 @@ namespace App\Service\Validator;
 interface UrlValidatorInterface
 {
     /**
-     * @param string $url
+     * @param String $url
      * @return bool
      */
-    public function validateUrl(string $url): bool;
+    public function validateUrl(String $url): bool;
 }

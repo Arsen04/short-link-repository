@@ -4,14 +4,15 @@ namespace App\Service\Validator;
 
 use App\Service\Validator\Exception\ValidationException;
 
-class UrlValidator implements UrlValidatorInterface
+class UrlValidator
+    implements UrlValidatorInterface
 {
     /**
-     * @param string $url
+     * @param String $url
      * @return bool
      * @throws ValidationException
      */
-    public function validateUrl(string $url): bool
+    public function validateUrl(String $url): bool
     {
         if (!preg_match("~^https?://~i", $url)) {
             $validationErrors = ['url' => 'Invalid URL format.'];

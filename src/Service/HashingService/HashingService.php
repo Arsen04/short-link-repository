@@ -6,23 +6,23 @@ class HashingService
     implements HashingServiceInterface
 {
     /**
-     * @var string
+     * @var String
      */
-    protected string $baseUrl;
+    protected String $baseUrl;
 
     /**
-     * @param string $baseUrl
+     * @param String $baseUrl
      */
-    public function __construct(string $baseUrl)
+    public function __construct(String $baseUrl)
     {
         $this->baseUrl = $baseUrl;
     }
 
     /**
-     * @param string $url
-     * @return string
+     * @param String $url
+     * @return String
      */
-    public function hashLink(string $url): string
+    public function hashLink(String $url): String
     {
         $hashedUrl = hash("sha256", $url);
         $shortId = substr($hashedUrl, 0, 8);

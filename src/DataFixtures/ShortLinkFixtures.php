@@ -7,7 +7,8 @@ use App\Enum\LifeTimeEnum;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class ShortLinkFixtures extends Fixture
+class ShortLinkFixtures
+    extends Fixture
 {
     public function load(ObjectManager $manager): void
     {

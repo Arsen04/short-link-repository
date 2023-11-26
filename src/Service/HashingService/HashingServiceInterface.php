@@ -5,8 +5,8 @@ namespace App\Service\HashingService;
 interface HashingServiceInterface
 {
     /**
-     * @param string $url
-     * @return string
+     * @param String $url
+     * @return String
      */
-    public function hashLink(string $url): string;
+    public function hashLink(String $url): String;
 }

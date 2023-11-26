@@ -6,27 +6,30 @@ class UrlParser
     implements UrlParserInterface
 {
     /**
-     * @var string
+     * @var String
      */
-    protected string $url;
+    protected String $url;
+
     /**
-     * @var string
+     * @var String
      */
-    protected string $protocol;
+    protected String $protocol;
+
     /**
-     * @var string
+     * @var String
      */
-    protected string $host;
+    protected String $host;
+
     /**
-     * @var string
+     * @var String
      */
-    protected string $path;
+    protected String $path;
 
     /**
      * UrlParser constructor.
-     * @param string $url
+     * @param String $url
      */
-    public function __construct(string $url)
+    public function __construct(String $url)
     {
         $this->url = $url;
         $this->parseUrl();
@@ -47,28 +50,28 @@ class UrlParser
     }
 
     /**
-     * Getting Protocol (http:// или https://).
-     * @return string
+     * Getting Protocol (http:// or https://).
+     * @return String
      */
-    public function getProtocol(): string
+    public function getProtocol(): String
     {
         return $this->protocol;
     }
 
     /**
      * Get path
-     * @return string
+     * @return String
      */
-    public function getHost(): string
+    public function getHost(): String
     {
         return $this->host;
     }
 
     /**
      * Get path values
-     * @return string
+     * @return String
      */
-    public function getPath(): string
+    public function getPath(): String
     {
         return $this->path;
     }

@@ -16,16 +16,19 @@ class ShortLink
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $baseUrl = null;
+    private ?String $baseUrl = null;
 
     #[ORM\Column(name: "short_url", length: 255)]
-    private ?string $shortUrl = null;
+    private ?String $shortUrl = null;
+
+    #[ORM\Column(name: "url_path", length: 255)]
+    private ?String $urlPath = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $redirectCount = 0;
 
     #[ORM\Column(length: 255)]
-    private ?string $websiteHost = null;
+    private ?String $websiteHost = null;
 
     #[ORM\Column]
     private ?float $lifeTime = null;
@@ -48,18 +51,18 @@ class ShortLink
     }
 
     /**
-     * @return string|null
+     * @return String|null
      */
-    public function getBaseUrl(): ?string
+    public function getBaseUrl(): ?String
     {
         return $this->baseUrl;
     }
 
     /**
-     * @param string $baseUrl
+     * @param String $baseUrl
      * @return $this
      */
-    public function setBaseUrl(string $baseUrl): static
+    public function setBaseUrl(String $baseUrl): static
     {
         $this->baseUrl = $baseUrl;
 
@@ -67,22 +70,38 @@ class ShortLink
     }
 
     /**
-     * @return string|null
+     * @return String|null
      */
-    public function getShortUrl(): ?string
+    public function getShortUrl(): ?String
     {
         return $this->shortUrl;
     }
 
     /**
-     * @param string $shortUrl
+     * @param String $shortUrl
      * @return $this
      */
-    public function setShortUrl(string $shortUrl): static
+    public function setShortUrl(String $shortUrl): static
     {
         $this->shortUrl = $shortUrl;
 
         return $this;
+    }
+
+    /**
+     * @return String|null
+     */
+    public function getUrlPath(): ?String
+    {
+        return $this->urlPath;
+    }
+
+    /**
+     * @param String|null $urlPath
+     */
+    public function setUrlPath(?String $urlPath): void
+    {
+        $this->urlPath = $urlPath;
     }
 
     /**
@@ -105,18 +124,18 @@ class ShortLink
     }
 
     /**
-     * @return string|null
+     * @return String|null
      */
-    public function getWebsiteHost(): ?string
+    public function getWebsiteHost(): ?String
     {
         return $this->websiteHost;
     }
 
     /**
-     * @param string $websiteHost
+     * @param String $websiteHost
      * @return $this
      */
-    public function setWebsiteHost(string $websiteHost): static
+    public function setWebsiteHost(String $websiteHost): static
     {
         $this->websiteHost = $websiteHost;
 

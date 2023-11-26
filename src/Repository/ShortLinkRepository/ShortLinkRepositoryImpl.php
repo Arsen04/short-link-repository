@@ -5,10 +5,10 @@ namespace App\Repository\ShortLinkRepository;
 use App\Entity\ShortLink;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @extends ServiceEntityRepository<ShortLink>
- *
  * @method ShortLink|null find($id, $lockMode = null, $lockVersion = null)
  * @method ShortLink|null findOneBy(array $criteria, array $orderBy = null)
  * @method ShortLink[]    findAll()
@@ -28,6 +28,24 @@ class ShortLinkRepositoryImpl
         $entityManager = $this->getEntityManager();
         $entityManager->persist($shortLink);
         $entityManager->flush();
+    }
+
+    public function insertOrUpdate(ShortLink $shortLink): array
+    {
+        $shortLinkExisting = $this->findOneBy(['baseUrl' => $shortLink->getBaseUrl()]);
+
+        if (!$shortLinkExisting) {
+            $this->save($shortLink);
+
+            return ['status' => 'added', 'message' => 'Short link added successfully', 'code' => Response::HTTP_CREATED];
+        } else {
+            $updatedAt = new \DateTimeImmutable();
+            $shortLinkExisting->setUpdatedAt($updatedAt);
+
+            $this->save($shortLinkExisting);
+
+            return ['status' => 'updated', 'message' => 'Short link updated successfully', 'code' => Response::HTTP_OK];
+        }
     }
 
 //    /**

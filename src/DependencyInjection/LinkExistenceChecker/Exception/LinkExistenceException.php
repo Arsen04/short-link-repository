@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Service\Validator\Exception;
+namespace App\DependencyInjection\LinkExistenceChecker\Exception;
 
 use Exception;
 use Throwable;
 
-class ValidationException
+class LinkExistenceException
     extends Exception
-    implements ValidationExceptionInterface
+    implements LinkExistenceExceptionInterface
 {
-    protected array $validationErrors;
+    protected array $existenceErrors;
 
     /**
      * @param string $message
      * @param int $code
-     * @param array $validationErrors
+     * @param array $existenceErrors
      * @param Throwable|null $previous
      */
     public function __construct(
         String $message = "",
         int $code = 0,
-        array $validationErrors = [],
+        array $existenceErrors = [],
         Throwable $previous = null
     )
     {
@@ -29,14 +29,14 @@ class ValidationException
             $code,
             $previous
         );
-        $this->validationErrors = $validationErrors;
+        $this->existenceErrors = $existenceErrors;
     }
 
     /**
      * @return array
      */
-    public function getValidationErrors(): array
+    public function getExistenceErrors(): array
     {
-        return $this->validationErrors;
+        return $this->existenceErrors;
     }
 }

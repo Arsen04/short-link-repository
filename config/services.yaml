@@ -4,6 +4,7 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    base_url: 'https://www.short.link/'
 
 services:
     # default configuration for services in *this* file
@@ -24,10 +25,26 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Service\HashingService\HashingService:
         arguments:
-            $baseUrl: 'https://www.short.link/'
+            $baseUrl: '%base_url%'
 
     App\Controller\LinkShortenerController:
         arguments:
             $hashingService: '@App\Service\HashingService\HashingService'
         tags:
             - { name: 'controller.service_arguments' }
+
+    App\Controller\LinkRedirectController:
+        arguments:
+            $shortLinkRepository: '@App\Repository\ShortLinkRepository\ShortLinkRepositoryImpl'
+            $existenceChecker: '@App\DependencyInjection\LinkExistenceChecker\LinkExistenceChecker'
+        tags:
+            - { name: 'controller.service_arguments' }
+    App\DependencyInjection\LinkExistenceChecker\LinkExistenceChecker:
+        arguments:
+            $baseUrl: '%base_url%'
+
+    App\DependencyInjection\LinkExpirationChecker\LinkExpirationChecker:
+        autowire: true
+        arguments:
+            $shortLinkRepository: '@App\Repository\ShortLinkRepository\ShortLinkRepositoryImpl'
+            $expirationThreshold: 3600

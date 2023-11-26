@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\ShortLink;
+use App\Enum\LifeTimeEnum;
 use App\Repository\ShortLinkRepository\ShortLinkRepositoryImpl;
 use App\Service\GettingHost\UrlParser;
 use App\Service\HashingService\HashingService;
@@ -41,7 +42,7 @@ class LinkShortenerController
     (
         HashingService $hashingService,
         UrlValidator $urlValidator,
-        ShortLinkRepositoryImpl $shortLinkRepository
+        ShortLinkRepositoryImpl $shortLinkRepository,
     )
     {
         $this->hashingService = $hashingService;
@@ -65,11 +66,11 @@ class LinkShortenerController
     ): JsonResponse
     {
         $decodedRequest = json_decode($request->getContent());
-
         $url = $decodedRequest->url;
 
         $urlValidator->validateUrl($url);
         $shortedLink = $hashingService->hashLink($url);
+        $lifeTime = LifeTimeEnum::TWENTY->value;
 
         $urlParser = new UrlParser($url);
         $urlProtocol = $urlParser->getProtocol() . PHP_EOL;
@@ -79,17 +80,22 @@ class LinkShortenerController
         $shortLink = new ShortLink();
         $shortLink->setBaseUrl($url);
         $shortLink->setShortUrl($shortedLink);
+        $shortLink->setUrlPath($urlPath);
         $shortLink->setWebsiteHost($urlHost);
-        $shortLink->setLifeTime(1728000);
+        $shortLink->setLifeTime($lifeTime);
         $shortLink->setCreatedAt();
 
-        $shortLinkRepository->save($shortLink);
-        $message = 'added';
+        $response = $shortLinkRepository->insertOrUpdate($shortLink);
+        $status = $response['status'];
+        $message = $response['message'];
+        $code = $response['code'];
 
         return $this->json([
+            'code' => $code,
+            'status' => $status,
+            'message' => $message,
             'link' => $shortedLink,
-            'status' => 201,
-            'message' => $message
+            'shortLinkLifetime' => $lifeTime
         ]);
     }
 }
