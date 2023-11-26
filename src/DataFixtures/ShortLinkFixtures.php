@@ -17,6 +17,7 @@ class ShortLinkFixtures
         $shortLink->setShortUrl('https://www.short.link/9b639721');
         $shortLink->setRedirectCount(12);
         $shortLink->setWebsiteHost('www.google.com');
+        $shortLink->setUrlPath('/query?=something');
         $shortLink->setLifeTime(LifeTimeEnum::TWENTY->value);
         $shortLink->setCreatedAt();
         $manager->persist($shortLink);

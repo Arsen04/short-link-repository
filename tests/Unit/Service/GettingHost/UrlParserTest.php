@@ -5,7 +5,8 @@ namespace Unit\Service\GettingHost;
 use PHPUnit\Framework\TestCase;
 use App\Service\GettingHost\UrlParser;
 
-class UrlParserTest extends TestCase
+class UrlParserTest
+    extends TestCase
 {
     public function testGetProtocol()
     {
