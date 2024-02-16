@@ -1,13 +1,13 @@
 <?php
 
-namespace App\DependencyInjection\LinkExpirationChecker\Exception;
+namespace App\Service\LinkService\LinkExistenceChecker\Exception;
 
 use Exception;
 use Throwable;
 
-class LinkExpirationException
+class LinkExistenceException
     extends Exception
-    implements LinkExpirationExceptionInterface
+    implements LinkExistenceExceptionInterface
 {
     protected array $existenceErrors;
 
@@ -35,7 +35,7 @@ class LinkExpirationException
     /**
      * @return array
      */
-    public function getExpirationErrors(): array
+    public function getExistenceErrors(): array
     {
         return $this->existenceErrors;
     }

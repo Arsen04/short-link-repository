@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DependencyInjection\LinkExistenceChecker;
+namespace App\Service\LinkService\LinkExistenceChecker;
 
 use App\Entity\ShortLink;
 

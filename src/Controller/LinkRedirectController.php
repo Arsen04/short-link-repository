@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\DependencyInjection\LinkExistenceChecker\Exception\LinkExistenceException;
-use App\DependencyInjection\LinkExistenceChecker\LinkExistenceChecker;
-use App\DependencyInjection\LinkExpirationChecker\Exception\LinkExpirationException;
-use App\DependencyInjection\LinkExpirationChecker\LinkExpirationChecker;
 use App\Repository\ShortLinkRepository\ShortLinkRepositoryImpl;
+use App\Service\LinkService\LinkExistenceChecker\Exception\LinkExistenceException;
+use App\Service\LinkService\LinkExistenceChecker\LinkExistenceChecker;
+use App\Service\LinkService\LinkExpirationChecker\Exception\LinkExpirationException;
+use App\Service\LinkService\LinkExpirationChecker\LinkExpirationChecker;
 use JetBrains\PhpStorm\NoReturn;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;

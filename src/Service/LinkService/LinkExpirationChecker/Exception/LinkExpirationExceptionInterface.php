@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DependencyInjection\LinkExpirationChecker\Exception;
+namespace App\Service\LinkService\LinkExpirationChecker\Exception;
 
 interface LinkExpirationExceptionInterface
 {

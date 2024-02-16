@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DependencyInjection\LinkExpirationChecker;
+namespace App\Service\LinkService\LinkExpirationChecker;
 
 use App\Entity\ShortLink;
 

@@ -17,7 +17,7 @@ services:
     App\:
         resource: '../src/'
         exclude:
-            - '../src/DependencyInjection/'
+            - '../src/Service/'
             - '../src/Entity/'
             - '../src/Kernel.php'
 
@@ -36,15 +36,17 @@ services:
     App\Controller\LinkRedirectController:
         arguments:
             $shortLinkRepository: '@App\Repository\ShortLinkRepository\ShortLinkRepositoryImpl'
-            $existenceChecker: '@App\DependencyInjection\LinkExistenceChecker\LinkExistenceChecker'
+            $existenceChecker: '@App\Service\LinkService\LinkExistenceChecker\LinkExistenceChecker'
         tags:
             - { name: 'controller.service_arguments' }
-    App\DependencyInjection\LinkExistenceChecker\LinkExistenceChecker:
+    App\Service\LinkService\LinkExistenceChecker\LinkExistenceChecker:
         arguments:
             $baseUrl: '%base_url%'
 
-    App\DependencyInjection\LinkExpirationChecker\LinkExpirationChecker:
+    App\Service\LinkService\LinkExpirationChecker\LinkExpirationChecker:
         autowire: true
         arguments:
             $shortLinkRepository: '@App\Repository\ShortLinkRepository\ShortLinkRepositoryImpl'
             $expirationThreshold: 3600
+
+    App\Service\Validator\UrlValidator: ~

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\DependencyInjection\LinkExistenceChecker;
+namespace App\Service\LinkService\LinkExistenceChecker;
 
-use App\DependencyInjection\LinkExistenceChecker\Exception\LinkExistenceException;
 use App\Entity\ShortLink;
 use App\Repository\ShortLinkRepository\ShortLinkRepositoryImpl;
+use App\Service\LinkService\LinkExistenceChecker\Exception\LinkExistenceException;
 
 class LinkExistenceChecker
     implements LinkExistenceCheckerInterface

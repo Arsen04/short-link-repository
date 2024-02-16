@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DependencyInjection\LinkExistenceChecker\Exception;
+namespace App\Service\LinkService\LinkExistenceChecker\Exception;
 
 interface LinkExistenceExceptionInterface
 {

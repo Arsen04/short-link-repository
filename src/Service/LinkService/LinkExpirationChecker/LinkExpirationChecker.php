@@ -1,10 +1,10 @@
 <?php
 
-namespace App\DependencyInjection\LinkExpirationChecker;
+namespace App\Service\LinkService\LinkExpirationChecker;
 
-use App\DependencyInjection\LinkExpirationChecker\Exception\LinkExpirationException;
 use App\Entity\ShortLink;
 use App\Repository\ShortLinkRepository\ShortLinkRepositoryImpl;
+use App\Service\LinkService\LinkExpirationChecker\Exception\LinkExpirationException;
 use DateTimeImmutable;
 
 class LinkExpirationChecker
