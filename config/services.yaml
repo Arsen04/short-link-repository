@@ -23,13 +23,17 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    App\Service\HashingService\HashingService:
-        arguments:
-            $baseUrl: '%base_url%'
+    App\Service\HashingService\HashingService: ~
 
     App\Controller\LinkShortenerController:
         arguments:
             $hashingService: '@App\Service\HashingService\HashingService'
+        tags:
+            - { name: 'controller.service_arguments' }
+
+    App\Controller\QrCodeGeneratorController:
+        arguments:
+            $folder_path: '%kernel.project_dir%/public/img/QrCodes/'
         tags:
             - { name: 'controller.service_arguments' }
 
@@ -39,9 +43,9 @@ services:
             $existenceChecker: '@App\Service\LinkService\LinkExistenceChecker\LinkExistenceChecker'
         tags:
             - { name: 'controller.service_arguments' }
+
     App\Service\LinkService\LinkExistenceChecker\LinkExistenceChecker:
-        arguments:
-            $baseUrl: '%base_url%'
+        autowire: true
 
     App\Service\LinkService\LinkExpirationChecker\LinkExpirationChecker:
         autowire: true
@@ -50,3 +54,10 @@ services:
             $expirationThreshold: 3600
 
     App\Service\Validator\UrlValidator: ~
+
+    App\Service\QrService\QrConfigurator\QrConfigurator:
+        autowire: true
+        arguments:
+            $folder_path: '%kernel.project_dir%/public/img/QrCodes/'
+
+

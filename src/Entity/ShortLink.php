@@ -30,6 +30,9 @@ class ShortLink
     #[ORM\Column(length: 255)]
     private ?String $websiteHost = null;
 
+    #[ORM\Column(length: 16, nullable: true)]
+    private ?String $qrCode = null;
+
     #[ORM\Column]
     private ?float $lifeTime = null;
 
@@ -140,6 +143,22 @@ class ShortLink
         $this->websiteHost = $websiteHost;
 
         return $this;
+    }
+
+    /**
+     * @return String|null
+     */
+    public function getQrCode(): ?string
+    {
+        return $this->qrCode;
+    }
+
+    /**
+     * @param String|null $qrCode
+     */
+    public function setQrCode(?string $qrCode): void
+    {
+        $this->qrCode = $qrCode;
     }
 
     /**

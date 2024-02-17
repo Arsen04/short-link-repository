@@ -5,7 +5,6 @@ namespace App\Repository\ShortLinkRepository;
 use App\Entity\ShortLink;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @extends ServiceEntityRepository<ShortLink>
@@ -37,15 +36,17 @@ class ShortLinkRepositoryImpl
         if (!$shortLinkExisting) {
             $this->save($shortLink);
 
-            return ['status' => 'added', 'message' => 'Short link added successfully', 'code' => Response::HTTP_CREATED];
+            $action = "Add";
         } else {
             $updatedAt = new \DateTimeImmutable();
+            $shortLinkExisting->setShortUrl($shortLink->getShortUrl());
             $shortLinkExisting->setUpdatedAt($updatedAt);
-
             $this->save($shortLinkExisting);
 
-            return ['status' => 'updated', 'message' => 'Short link updated successfully', 'code' => Response::HTTP_OK];
+            $action = "Update";
         }
+
+        return ["action" => $action];
     }
 
 //    /**

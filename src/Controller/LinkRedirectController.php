@@ -11,7 +11,6 @@ use JetBrains\PhpStorm\NoReturn;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class LinkRedirectController
@@ -53,13 +52,13 @@ class LinkRedirectController
      * @param ShortLinkRepositoryImpl $shortLinkRepository
      * @param LinkExistenceChecker $existenceChecker
      * @param LinkExpirationChecker $expirationChecker
-     * @param String $path
+     * @param Request $request
      * @return RedirectResponse|void
      * @throws LinkExistenceException
      * @throws LinkExpirationException
      */
     #[NoReturn] #[Route(
-        path: '/{path}',
+        path: '/redirect/{path}',
         name: 'link_redirect',
         methods: Request::METHOD_GET
     )]
@@ -67,20 +66,22 @@ class LinkRedirectController
         ShortLinkRepositoryImpl $shortLinkRepository,
         LinkExistenceChecker $existenceChecker,
         LinkExpirationChecker $expirationChecker,
-        String $path
+        Request $request
     )
     {
-        $urlPath = new Response($path);
+        $urlPath = $request->attributes->get('path');
 
-        $linkExists = $existenceChecker->linkExists($urlPath->getContent());
+        $linkExists = $existenceChecker->linkExists($urlPath);
         $linkExpired = $expirationChecker->linkExpired($linkExists);
 
         if (!$linkExpired) {
             $linkRedirect = $linkExists->getRedirectCount() + 1;
             $linkExists->setRedirectCount($linkRedirect);
-            $shortLinkRepository->save($linkExists);
-            $redirectUrl = $linkExists->getBaseUrl();
 
+            $shortLinkRepository->save($linkExists);
+
+            $baseUrl = getenv('BASE_URL');
+            $redirectUrl = $baseUrl . $linkExists->getBaseUrl();
             return $this->redirect($redirectUrl);
         }
     }

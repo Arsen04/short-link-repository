@@ -10,26 +10,18 @@ class LinkExistenceChecker
     implements LinkExistenceCheckerInterface
 {
     /**
-     * @var string
-     */
-    protected string $baseUrl;
-
-    /**
      * @var ShortLinkRepositoryImpl
      */
     private ShortLinkRepositoryImpl $shortLinkRepository;
 
     /**
      * @param ShortLinkRepositoryImpl $shortLinkRepository
-     * @param string $baseUrl
      */
     public function __construct(
         ShortLinkRepositoryImpl $shortLinkRepository,
-        string $baseUrl
     )
     {
         $this->shortLinkRepository = $shortLinkRepository;
-        $this->baseUrl = $baseUrl;
     }
 
     /**
@@ -39,8 +31,7 @@ class LinkExistenceChecker
      */
     public function linkExists(String $path): ShortLink
     {
-        $url = $this->baseUrl . $path;
-        $linkExists = $this->shortLinkRepository->findOneBy(['shortUrl' => $url]);
+        $linkExists = $this->shortLinkRepository->findOneBy(['shortUrl' => $path]);
 
         if ($linkExists) {
             return $linkExists;
