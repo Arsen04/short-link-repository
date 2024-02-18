@@ -29,7 +29,9 @@ class UrlParser
      * UrlParser constructor.
      * @param String $url
      */
-    public function __construct(String $url)
+    public function __construct(
+        String $url
+    )
     {
         $this->url = $url;
         $this->parseUrl();

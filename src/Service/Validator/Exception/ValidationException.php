@@ -9,6 +9,9 @@ class ValidationException
     extends Exception
     implements ValidationExceptionInterface
 {
+    /**
+     * @var array
+     */
     protected array $validationErrors;
 
     /**

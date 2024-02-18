@@ -19,7 +19,12 @@ class QrConfigurator
      */
     protected String $folder_path;
 
-    public function __construct(String $folder_path)
+    /**
+     * @param String $folder_path
+     */
+    public function __construct(
+        String $folder_path
+    )
     {
         $this->folder_path = $folder_path;
     }
@@ -65,8 +70,10 @@ class QrConfigurator
             ->setMargin(0)
             ->setForegroundColor(new Color(0, 0, 0))
             ->setBackgroundColor(new Color(255, 255, 255));
+
         $logo = Logo::create($logoPath)
             ->setResizeToWidth(60);
+
         $label = Label::create('')->setFont(new NotoSans(8));
 
         $qrCodes = [];

@@ -9,6 +9,9 @@ class LinkExpirationException
     extends Exception
     implements LinkExpirationExceptionInterface
 {
+    /**
+     * @var array
+     */
     protected array $existenceErrors;
 
     /**

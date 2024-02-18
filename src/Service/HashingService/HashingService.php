@@ -9,7 +9,9 @@ class HashingService
      * @param String $url
      * @return String
      */
-    public function hashLink(String $url): String
+    public function hashLink(
+        String $url
+    ): String
     {
         $hashedUrl = hash("sha256", $url);
         $shortId = substr($hashedUrl, 0, 8);

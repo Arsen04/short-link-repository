@@ -82,6 +82,7 @@ class LinkRedirectController
 
             $baseUrl = getenv('BASE_URL');
             $redirectUrl = $baseUrl . $linkExists->getBaseUrl();
+
             return $this->redirect($redirectUrl);
         }
     }
