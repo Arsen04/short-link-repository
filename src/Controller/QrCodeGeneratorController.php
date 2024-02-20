@@ -129,11 +129,12 @@ class QrCodeGeneratorController
             $message = "Can't create QR code";
         }
 
-        return $this->json([
-            'code' => $code,
+        return new JsonResponse([
             'status' => $status,
-            'message' => $message,
-            'qrFileName' => $fileName
-        ]);
+            'data' => [
+                'message' => $message,
+                'qrFileName' => $fileName
+            ]
+        ], $code);
     }
 }

@@ -115,12 +115,13 @@ class LinkShortenerController
             $code = Response::HTTP_BAD_GATEWAY;
         }
 
-        return $this->json([
-            'code' => $code,
+        return new JsonResponse([
             'status' => $status,
-            'message' => $message,
-            'link' => $shortedLink,
-            'shortLinkLifetime' => $lifeTime
-        ]);
+            'data' => [
+                'message' => $message,
+                'link' => $shortedLink,
+                'shortLinkLifetime' => $lifeTime
+            ]
+        ], $code);
     }
 }
